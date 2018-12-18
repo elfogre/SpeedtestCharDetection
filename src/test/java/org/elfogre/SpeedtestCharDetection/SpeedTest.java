@@ -10,6 +10,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
+
+import static org.apache.commons.lang3.ArrayUtils.toObject;
+import static java.util.Arrays.asList;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -27,6 +31,10 @@ public class SpeedTest {
 	private static final String OK_CHARS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.-_";
 	private static final String SOME_NOT_OK_CHARS = OK_CHARS + "ñ()^";
 	private static final String RESULT_FORMAT = "OK: %d, not OK: %d";
+
+	private static final char[] VALID_CHARS_ARRAY = OK_CHARS.toCharArray();
+	private static final Set<Character> VALID_CHARS_SET = Collections
+			.unmodifiableSet(new HashSet<>(asList(toObject(VALID_CHARS_ARRAY))));
 
 	@BeforeClass
 	public static void createTestLists() {
@@ -135,6 +143,21 @@ public class SpeedTest {
 		IntPredicate p1 = s -> OK_CHARS.contains(Character.toString(new Character((char) s)));
 		for (String string : testingStrings) {
 			boolean allLetters = string.chars().allMatch(p1);
+			if (allLetters) {
+				totalOK++;
+			} else {
+				totalNOK++;
+			}
+		}
+		System.out.println(String.format(RESULT_FORMAT, totalOK, totalNOK));
+	}
+	
+	@Test
+	public void testWithStringUtilsContainsOnly() {
+		int totalOK = 0;
+		int totalNOK = 0;
+		for (String string : testingStrings) {
+			boolean allLetters = StringUtils.containsOnly(string, VALID_CHARS_ARRAY);
 			if (allLetters) {
 				totalOK++;
 			} else {
