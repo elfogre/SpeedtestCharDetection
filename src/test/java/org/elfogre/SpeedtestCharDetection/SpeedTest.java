@@ -22,7 +22,7 @@ public class SpeedTest {
 
 	private static final int LISTS_SIZE = 200000;
 	private static final int LONG_STRINGS_LENGTH = 4000;
-	private static final int SHORT_STRINGS_LENGTH = 40;
+	private static final int SHORT_STRINGS_LENGTH = 4000;
 
 	private static final String OK_CHARS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.-_";
 	private static final String SOME_NOT_OK_CHARS = OK_CHARS + "ñ()^";
@@ -128,6 +128,7 @@ public class SpeedTest {
 		return true;
 	}
 
+	@Test
 	public void checkWithJava8() {
 		int totalOK = 0;
 		int totalNOK = 0;
