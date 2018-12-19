@@ -12,8 +12,6 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import static org.apache.commons.lang3.ArrayUtils.toObject;
-import static java.util.Arrays.asList;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -33,8 +31,6 @@ public class SpeedTest {
 	private static final String RESULT_FORMAT = "OK: %d, not OK: %d";
 
 	private static final char[] VALID_CHARS_ARRAY = OK_CHARS.toCharArray();
-	private static final Set<Character> VALID_CHARS_SET = Collections
-			.unmodifiableSet(new HashSet<>(asList(toObject(VALID_CHARS_ARRAY))));
 
 	@BeforeClass
 	public static void createTestLists() {
